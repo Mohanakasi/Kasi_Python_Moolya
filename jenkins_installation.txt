@@ -1,0 +1,27 @@
+excel reading
+excel writing
+screenshot capture
+
+
+Testcases
+Utilities
+Libraries  -- all libraries packages
+Logs
+Test Data
+Constants
+PageObjects
+Locators
+
+
+
+jenkins process
+-------------
+java jdk installation
+git installation
+jenkins.war file download
+setting up the jenkins.war from the command prompt (from download folder open cmd and run this command --> java -jar jenkins.war)
+after that open browser and run the localhost:8080 and enter the pasword got from jenkins.war intalled in cmd
+setup the user registration process and in jira dashboard click on mange jenkins --> pluggins --> install git integration, jira integration pluggins
+
+test_pom_sel/ajio_submission
+

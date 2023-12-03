@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "efa27c9e-c713-49e3-8c40-c5b88eaaff5a",
+		"name": "Simple_book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30282899"
+	},
+	"item": [
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "get access token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"kasi_token = pm.response.json().accessToken\r",
+									"console.log.accessToken\r",
+									"pm.environment.set('kasi_token',kasi_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"clientName\": \"Postman\",\r\n   \"clientEmail\": \"kasimohana{{$randomInt}}@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{books_base_url}}/api-clients/",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"api-clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetching all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"randam_book_id = pm.response.json()[1].id\r",
+									"pm.environment.set(\"randam_book_id\", randam_book_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{books_base_url}}/books",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetching single book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{books_base_url}}//books/{{randam_book_id}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"",
+								"books",
+								"{{randam_book_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create a order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"crt_order_ID = pm.response.json().orderId\r",
+									"pm.environment.set(\"crt_order_ID\", crt_order_ID)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kasi_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bookId\": 4,\r\n  \"customerName\": \"Kasi's History\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{books_base_url}}/orders/",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kasi_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{books_base_url}}/orders/{{crt_order_ID}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								"{{crt_order_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{kasi_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kasi_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerName\": \"Mohan's History\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{books_base_url}}/orders/{{crt_order_ID}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								"{{crt_order_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order after update",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kasi_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{books_base_url}}/orders/{{crt_order_ID}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								"{{crt_order_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{books_base_url}}/orders/{{crt_order_ID}}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kasi_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{books_base_url}}/orders/{{crt_order_ID}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								"{{crt_order_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

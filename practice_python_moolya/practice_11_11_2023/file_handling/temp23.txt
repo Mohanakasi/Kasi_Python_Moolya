@@ -1,0 +1,4 @@
+This is Mohana kasi
+its a python world
+contains all objects
+having intrepretor

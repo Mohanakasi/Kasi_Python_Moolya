@@ -1,0 +1,914 @@
+{
+	"info": {
+		"_postman_id": "af51b69c-c4c9-4eb7-a85e-bebf0d2aba5f",
+		"name": "Api_training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30282899"
+	},
+	"item": [
+		{
+			"name": "Json",
+			"item": [
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"place_id = pm.response.json().place_id\r",
+									"console.log(place_id)\r",
+									"\r",
+									"pm.environment.set(\"id\",place_id);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location\": {\r\n        \"lat\": -38.383494,\r\n        \"lng\": 33.427362\r\n    },\r\n    \"accuracy\": 50,\r\n    \"name\": \"Frontline house\",\r\n    \"phone_number\": \"(+91) 983 893 3937\",\r\n    \"address\": \"29, side layout, cohen 09\",\r\n    \"types\": [\r\n        \"shoe park\",\r\n        \"shop\"\r\n    ],\r\n    \"website\": \"http://google.com\",\r\n    \"language\": \"French-IN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{map_base_url}}/maps/api/place/add/json?key= qaclick123",
+							"host": [
+								"{{map_base_url}}"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"add",
+								"json"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": " qaclick123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{map_base_url}}/maps/api/place/delete/xml",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_id\": \"{{id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{map_base_url}}/maps/api/place/delete/json",
+							"host": [
+								"{{map_base_url}}"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"delete",
+								"json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "XML",
+			"item": [
+				{
+					"name": "{{map_base_url}}/maps/api/place/add/xml?key= qaclick123",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonObject = xml2Json(responseBody);\r",
+									"var xml_id = jsonObject.response.place_id\r",
+									"pm.environment.set(\"xml_id\", xml_id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<root>\r\n    <location>\r\n        <lat>-38.383494</lat>\r\n        <lng>33.427362</lng>\r\n    </location>\r\n    <accuracy>50</accuracy>\r\n    <name>The Mens store</name>\r\n    <phone_number>(+91) 983 893 3937</phone_number>\r\n    <address>Anna Salai, Chennai</address>\r\n    <types>shoe park</types>\r\n    <types>kadai</types>\r\n    <website>http://google.com</website>\r\n    <language>tamil-IN</language>\r\n</root>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{map_base_url}}/maps/api/place/add/xml?key= qaclick123",
+							"host": [
+								"{{map_base_url}}"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"add",
+								"xml"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": " qaclick123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{map_base_url}}/maps/api/place/delete/xml?key=qaclick123",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<root>\r\n    <place_id>{{xml_id}}</place_id>\r\n</root>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{map_base_url}}/maps/api/place/delete/xml?key=qaclick123",
+							"host": [
+								"{{map_base_url}}"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"delete",
+								"xml"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "qaclick123"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Boards",
+			"item": [
+				{
+					"name": "task1",
+					"item": [
+						{
+							"name": "create a board Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"board_id = pm.response.json().id\r",
+											"console.log(board_id)\r",
+											"pm.globals.set(\"global_board_id\", board_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/?name={{global_board_name}}&key={{global_api_key}}&token={{global_api_token}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{global_board_name}}"
+										},
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating name  and colour of board",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}&name={{global_update_board_name}}&prefs_background=purple",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{global_update_board_name}}"
+										},
+										{
+											"key": "prefs_background",
+											"value": "purple"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get a board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Your test name\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.eql(\"{{global_board_name}}\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a board Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "task2",
+					"item": [
+						{
+							"name": "New Folder",
+							"item": []
+						},
+						{
+							"name": "create a board Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"board_id = pm.response.json().id\r",
+											"console.log(board_id)\r",
+											"pm.globals.set(\"global_board_id\", board_id);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/?name={{csv_create_board_name}}&key={{global_api_key}}&token={{global_api_token}}&prefs_background=red",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{csv_create_board_name}}"
+										},
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										},
+										{
+											"key": "prefs_background",
+											"value": "red"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating name  and colour of board",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}&name={{csv_update_board_name}}&prefs/background={{csv_color}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{csv_update_board_name}}"
+										},
+										{
+											"key": "prefs/background",
+											"value": "{{csv_color}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get a board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"validating board name\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.eql(\"{{csv_update_board_name}}\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a board Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{global_board_common_url}}/1/boards/{{global_board_id}}?key={{global_api_key}}&token={{global_api_token}}",
+									"host": [
+										"{{global_board_common_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{global_board_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{global_api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{global_api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "task3",
+					"item": [
+						{
+							"name": "create a board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"mohana_id = pm.response.json().id\r",
+											"pm.environment.set(\"mohana_id\", mohana_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{boards_base_url}}/1/boards/?name={{crt_board_name}}&key={{api_key}}&token={{api_token}}",
+									"host": [
+										"{{boards_base_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{crt_board_name}}"
+										},
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get the board",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{boards_base_url}}/1/boards/{{mohana_id}}?key={{api_key}}&token={{api_token}}",
+									"host": [
+										"{{boards_base_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{mohana_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{boards_base_url}}1/boards/{{mohana_id}}?key={{api_key}}&token={{api_token}}",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{boards_base_url}}/1/boards/{{mohana_id}}?key={{api_key}}&token={{api_token}}&name={{update_name}}&prefs/background={{color}}",
+									"host": [
+										"{{boards_base_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{mohana_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{api_token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{update_name}}"
+										},
+										{
+											"key": "prefs/background",
+											"value": "{{color}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a board",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{boards_base_url}}/1/boards/{{mohana_id}}?key={{api_key}}&token={{api_token}}",
+									"host": [
+										"{{boards_base_url}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{mohana_id}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{api_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get order after update Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{kasi_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{books_base_url}}/orders/{{crt_order_ID}}",
+							"host": [
+								"{{books_base_url}}"
+							],
+							"path": [
+								"orders",
+								"{{crt_order_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"board_id = pm.response.json().id\r",
+									"console.log(board_id)\r",
+									"pm.environment.set(\"board_id\", board_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{board_common_url}}/1/boards/?name={{board_name}}&prefs_background=purple&key={{api_key}}&token={{api_token}}",
+							"host": [
+								"{{board_common_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{board_name}}"
+								},
+								{
+									"key": "prefs_background",
+									"value": "purple"
+								},
+								{
+									"key": "key",
+									"value": "{{api_key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{api_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a board",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{board_common_url}}/1/boards/{{board_id}}?key={{api_key}}&token={{api_token}}",
+							"host": [
+								"{{board_common_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{board_id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{api_key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{api_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleting repo",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.github+json",
+								"type": "text"
+							},
+							{
+								"key": "X-GitHub-Api-Version",
+								"value": "2022-11-28",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Base_url}}/repos/{{Git_hub_user_name}}/{{updated_repo_name}}",
+							"host": [
+								"{{Base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{Git_hub_user_name}}",
+								"{{updated_repo_name}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

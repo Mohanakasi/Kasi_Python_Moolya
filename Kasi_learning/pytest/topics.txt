@@ -1,0 +1,26 @@
+freeze
+test naming
+test discovery
+different ways of running tests using pytest(pycharm termainal, command prompt, dirrectly in test method)
+different pytest commadns for executing test methods
+-v and -s options
+assertions
+assertion handling using pytest.raises()
+skipping tests (mark.skip, mark.skipif)
+grouping the test cases using markers
+xfail
+-k option
+-x option
+--maxfail 
+-q option
+--collect-only
+--lf
+--help
+parameterization (mark.parameterize)
+fixtures
+different scopes
+flow of fixtures
+sharing fixtures(conftest)
+multiple coftest files
+request param
+factories as fixtures

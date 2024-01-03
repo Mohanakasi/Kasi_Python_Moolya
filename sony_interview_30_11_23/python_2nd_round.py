@@ -29,12 +29,6 @@ try:
     print(string_[16])
 except IndexError:
     print("index is out of the range")
-#
-# for index in range(len(string_)):
-#     try:
-#         print(string_[index+1n])
-#     except IndexError:
-#         print("index is out of the range")
 
 
 string_ = 'Iam from moolya'

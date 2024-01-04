@@ -6,21 +6,22 @@ different pytest commadns for executing test methods
 -v and -s options
 assertions
 assertion handling using pytest.raises()
-skipping tests (mark.skip, mark.skipif)
+skipping tests (mark.skip, mark.skipif) (in skipif, the reason must specify)
 grouping the test cases using markers
-xfail
--k option
--x option
---maxfail 
+xfail -- (reason is mandatory when taking condition)
+-k option -- (to execute a particular test without specifying the module name)
+-x option -- (whenver any test failed, it will stops remaining tests execution)
+--maxfail -- (to stop the execution flow whenver the fails reached specified limit)
 -q option
---collect-only
---lf
+--collect-only   -- (only collecting the tests and showing in folder structure representaion)
+--lf -- (executest only last failed tests which will takes from the pytest cache)
+--ff   --(executest first faild tests and then executest reamining tests cases)
 --help
-parameterization (mark.parameterize)
-fixtures
-different scopes
-flow of fixtures
+parameterization    --- (mark.parameterize) -- to make test as data driven, we can apply parametrization in test methods only not in fixtures
+fixtures -- to setup the prior steps of test and passing data to the tests
+different scopes ---- (session, module, class, function)
+flow of fixtures ---- (test mehtod, conftest, fixture function, back to another tests)
 sharing fixtures(conftest)
-multiple coftest files
-request param
-factories as fixtures
+multiple coftest files ---- (we cannot have multiple conftest files in same directory, we can have multiple conftests in sub directory folders)
+request param ---- (type of data driven like parametrize)
+factories as fixtures ---- (defining the intermediate funcitons in fixtures and returnning function name and caling that function in test method for mutiple times)
